@@ -1,0 +1,17 @@
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  textarea.auto-expand {
+    width: 100%;
+    min-height: 40px;
+    max-height: 300px; /* limite máximo de altura, opcional */
+    resize: none;
+    overflow: hidden;
+    font-size: 16px;
+    padding: 8px;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  
