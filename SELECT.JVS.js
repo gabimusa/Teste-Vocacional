@@ -23,78 +23,38 @@ var qtdC = 0;
 var qtdD = 0;
 var qtdE = 0;
 
-function contar(select){
-
+function contar(select) {
   if (select.value == "A") qtdA++;
-else if (select.value == "B") qtdB++;
-else if (select.value == "C") qtdC++;
-else if (select.value == "D") qtdD++;
-else if (select.value == "E") qtdE++;
-
-  /*if(select.value==A){
-    qtdA++
-  }
-
-  else if(select.value==B){
-    qtdB++
-  }
-
-   else if(select.value==C){
-    qtdC++
-  }
-
-   else if(select.value==D){
-    qtdD++
-  }
-
-   else if(select.value==E){
-    qtdE++
-  }*/
+  else if (select.value == "B") qtdB++;
+  else if (select.value == "C") qtdC++;
+  else if (select.value == "D") qtdD++;
+  else if (select.value == "E") qtdE++;
 }
 
+function Mostrar() {
+  qtdA = qtdB = qtdC = qtdD = qtdE = 0;
 
-function Mostrar(){
-    const selects = document.querySelectorAll('select');
+  const selects = document.querySelectorAll('select');
+  selects.forEach(contar);
 
-    selects.forEach(contar)
-    console.log('Quantidade A:', qtdA);
-    console.log('Quantidade A:', qtdB);
-    console.log('Quantidade A:', qtdC);
-    console.log('Quantidade A:', qtdD);
-    console.log('Quantidade A:', qtdE);
+  document.getElementById("abcde").value = "a(" + qtdA + ");b(" + qtdB + ");c(" + qtdC + ");d(" + qtdD + ");e(" + qtdE + ")";
 
-    document.getElementById("abcde").value = "a" + qtdA + "b" + qtdB + "c" + qtdC + "d" + qtdD + "e" + qtdE;
+  const resultados = [
+    { letra: "A", quantidade: qtdA, mensagem: "Você tem inclinação para Ciências Exatas ou Tecnologia (ex.: Engenharia, Ciência da Computação, Matemática)." },
+    { letra: "B", quantidade: qtdB, mensagem: "Você se identifica com Artes ou Comunicação (ex.: Design, Publicidade, Jornalismo, Letras)." },
+    { letra: "C", quantidade: qtdC, mensagem: "Você tem interesse em Ciências Humanas ou Saúde (ex.: Psicologia, Medicina, Pedagogia, Serviço Social)." },
+    { letra: "D", quantidade: qtdD, mensagem: "Você se conecta com Ciências Biológicas ou Ambientais (ex.: Biologia, Agronomia, Gestão Ambiental)." },
+    { letra: "E", quantidade: qtdE, mensagem: "Você tem perfil para Gestão ou Negócios (ex.: Administração, Economia, Direito)." }
+  ];
 
-    if(qtdA > qtdB && qtdA > qtdC){
-        if(qtdA > qtdD && qtdA > qtdE){
-          document.getElementById("tela").value = "Maioria de 'a':Você tem inclinação para áreas de Ciências Exatas ou Tecnologia (ex.: Engenharia, Ciência da Computação, Matemática)."
-        }
-    }
+  const maior = Math.max(qtdA, qtdB, qtdC, qtdD, qtdE);
+  const empatados = resultados.filter(r => r.quantidade === maior);
 
-     else if(qtdB > qtdA && qtdB > qtdC){
-        if(qtdB > qtdD && qtdB > qtdE){
-          document.getElementById("tela").value = "Maioria de 'b': Você se identifica com Artes ou Comunicação (ex.: Design, Publicidade, Jornalismo, Letras)."
-        }
-    }
-
-     else if(qtdC > qtdA && qtdC > qtdB){
-        if(qtdC > qtdD && qtdC > qtdE){
-          document.getElementById("tela").value = "Maioria de 'c': Você tem interesse em Ciências Humanas ou Saúde (ex.: Psicologia, Medicina, Pedagogia, Serviço Social)."
-        }
-    }
-
-     else if(qtdD > qtdA && qtdD > qtdC){
-        if(qtdD > qtdB && qtdD > qtdE){
-          document.getElementById("tela").value = "Maioria de 'd': Você se conecta com Ciências Biológicas ou Ambientais (ex.: Biologia, Agronomia, Gestão Ambiental)."
-        }
-    }
-
-     else if(qtdE > qtdA && qtdE > qtdC){
-        if(qtdE > qtdD && qtdE > qtdB){
-          document.getElementById("tela").value = "Maioria de 'e': Você tem perfil para Gestão ou Negócios (ex.: Administração, Economia, Direito)."
-        }
-    }
-
-     
+  if (empatados.length === 1) {
+    document.getElementById("tela").value = "Maioria de '" + empatados[0].letra.toLowerCase() + "': " + empatados[0].mensagem;
+  } else {
+    const letrasEmpatadas = empatados.map(r => r.letra).join(", ");
+    document.getElementById("tela").value = "Empate entre as opções: " + letrasEmpatadas +
+      ". Você possui interesses variados, sugerimos explorar diferentes áreas para descobrir sua verdadeira vocação.";
+  }
 }
-
