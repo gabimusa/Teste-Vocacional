@@ -1,3 +1,36 @@
+const textareas = document.querySelectorAll('textarea.auto-expand');
+
+textareas.forEach(textarea => {
+  function autoExpand() {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
+  textarea.addEventListener('input', autoExpand);
+});
+
+// Ajusta todas as textareas quando a página carregar
+window.addEventListener('load', () => {
+  textareas.forEach(textarea => {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  });
+});
+
+var qtdA = 0;
+var qtdB = 0;
+var qtdC = 0;
+var qtdD = 0;
+var qtdE = 0;
+
+function contar(select) {
+  if (select.value == "A") qtdA++;
+  else if (select.value == "B") qtdB++;
+  else if (select.value == "C") qtdC++;
+  else if (select.value == "D") qtdD++;
+  else if (select.value == "E") qtdE++;
+}
+
 function Mostrar() {
   qtdA = qtdB = qtdC = qtdD = qtdE = 0;
 
@@ -31,3 +64,4 @@ function Mostrar() {
     document.getElementById("tela").value = "Empate entre categorias. Você possui interesses equilibrados entre várias áreas. Considere explorar mais de uma opção para definir sua vocação.";
   }
 }
+
